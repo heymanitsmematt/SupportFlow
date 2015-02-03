@@ -1,0 +1,140 @@
+﻿{% extends "app/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div id=content>
+    <a href="#" id="edit">Add Content</a>
+    <button id="start-timer">Start Timer</button>
+    <div id="timer">Time elapsed: <div id="time">0:00:00</div></div>
+    <button id="pause-timer">Pause Timer</button>
+        <div id="tree" class="tree">
+        <div id="software-name">
+        <h3 id="software_name">{{s.parent_name}}</h3>
+        </div>
+    </div>
+<div id="wrapper">
+    <div id="nodes">
+        <ul class="menu" id="menu-menu">
+            {% for n1 in s.node_1_set.all %}
+            <li class="menu-item" >
+                <a href="#" id="{{n1.id}}.{{n1.node_name}}">{{n1.node_name}}</a>
+
+                <ul class="dropdown-menu"> 
+                {% for n2 in n1.node_2_set.all %}
+                    <li class="menu-item"  id="{{forloop.parentloop.counter}}-{{forloop.parentloop.counter}}-{{forloop.counter}}">
+                        <a href="#" id="{{n2.id}}.{{n2.node_name}}">{{n2.node_name}}</a>
+
+                        <ul class="dropdown-menu">
+                            {% for n3 in n2.node_3_set.all %}
+                            <li class="menu-item" id="key{{forloop.parentloop.counter}}.{{forloop.parentloop.counter}}.{{forloop.parentloop.counter}}.{{forloop.counter}}">
+                                <a href="#" id="{{n3.id}}.{{n3.node_name}}">{{n3.node_name}}</a>
+                                <ul class="dropdown-menu">
+
+                                    {% for n4 in n3.node_4_set.all %}
+                                    <li class="menu-item" id="key{{forloop.parentloop.counter}}.{{forloop.parentloop.counter}}.{{forloop.parentloop.counter}}.{{forloop.counter}}">
+                                        <a href="#" id="{{n4.id}}.{{n4.node_name}}">{{n4.node_name}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+                </ul>
+           </li>
+         
+           {% endfor %}   
+          </ul>  
+        </div>
+
+        <div id="node_details">
+            <button id="menu-toggle-hide">Hide Menu</button>
+            <button id="menu-toggle-show">Show Menu</button>
+            <ul class="tabs">
+                <li>
+                    <a href="#tab_content_primary_01">Tab 1</a>
+                </li>
+                <li>
+                    <a href="#tab_content_primary_02">Tab 2</a>
+                </li>
+                <li>
+                    <a href="#tab_content_primary_03">Tab 3</a>
+                </li>
+            </ul>
+            <div id="tutorials">
+                <h3 class="node-name-details"> {{s.parent_description }} </h3>
+            </div>
+            <div id="content-frame">
+                <div id="tab_content_primary_01" class="tab_content">
+                    <div class="slide-wrapper">
+                        <div class="slide-buttons"></div>
+                        <div class="slide-viewer">
+                            <div class="slide-group">
+                                <div class="slide slide-1"><img src="{% static "app/content/node_content/conexion/images/1.jpg" %}" /></div>
+                                <div class="slide slide-2"><img src="/static/app/content/node_content/{{s.parent_name}}/images/2.jpg" /></div>
+                                <div class="slide slide-3"><img src="/static/app/content/node_content/{{s.parent_name}}/images/3.jpg" /></div>
+                                <div class="slide slide-4"><img src="/static/app/content/node_content/{{s.parent_name}}/images/4.jpg" /></div>
+                                <div class="slide slide-5"><img src="/static/app/content/node_content/{{s.parent_name}}/images/5.jpg" /></div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div id="tutorial">
+                        <p class="description">{{s.node_description}}</p>
+                        <p class="details"> {{s.details}} </p>
+                    </div>
+                </div>
+                <div id="tab_content_primary_02" class="tab_content">
+                    <p> this is content area 2</p>
+                </div>
+                <div id="tab_content_primary_03" class="tab_content">
+                    <p>this is content area 3</p>
+                </div>
+            </div>
+        </div>
+               
+      
+    
+            
+    </div>
+</div>
+<div></div>
+<div id="edit-modal">
+    <button id="edit_node">Edit existing node</button>
+    <button id="create_node">Create new node</button>
+</div>
+
+<div id="edit-form">
+    <form action="/node_edit/">
+        {% csrf_token %}
+        <p>Please select which node you wish to edit.</p>
+        <select class="select" id="tier-select" name="tier"> 
+            <option value="node_1">Tier1</option>
+            <option value="node_2">Tier2</option>
+            <option value="node_3">Tier3</option>
+            <option value="node_4">Tier4</option>
+            <option value="node_5">Tier5</option>
+        </select>
+        <select class="select" id="node-select" name="node"> 
+            <option value="select a tier">Select a Tier</option>
+        </select>
+        <br />
+        <p>Node Description:</p>
+        <textarea id="node_description" name="node-description"></textarea>
+        <br />
+        <p>Node Details:</p>
+        <textarea id="text-details" name="node-details"></textarea>
+        <input type="Submit" id="edit-submit" />
+    </form>
+  
+</div>
+
+<div id="new-form">
+    <form id="new-node-form" action="">
+        <div class="node-form-inputs">
+            {{form.as_p}}
+        </div>
+        <button id="new-submit">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

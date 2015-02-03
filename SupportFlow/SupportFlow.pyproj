@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Name>SupportFlow</Name>
+    <RootNamespace>SupportFlow</RootNamespace>
+    <InterpreterId>{66c03bdb-595b-4b44-8bab-ddaffe471049}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>21926d2f-7f0a-424b-9cec-9dba8517c531</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Django launcher</LaunchProvider>
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="app\forms.py" />
+    <Compile Include="app\models.py" />
+    <Compile Include="app\admin.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="app\tests.py" />
+    <Compile Include="app\urls.py" />
+    <Compile Include="app\views.py" />
+    <Compile Include="app\__init__.py" />
+    <Compile Include="manage.py" />
+    <Compile Include="SupportFlow\FlowAlgo.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SupportFlow\populatedb.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SupportFlow\__init__.py" />
+    <Compile Include="SupportFlow\settings.py" />
+    <Compile Include="SupportFlow\urls.py" />
+    <Compile Include="SupportFlow\wsgi.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\" />
+    <Folder Include="app\static\" />
+    <Folder Include="app\static\app\" />
+    <Folder Include="app\static\app\content\" />
+    <Folder Include="app\static\app\content\images\" />
+    <Folder Include="app\static\app\content\images\images\" />
+    <Folder Include="app\static\app\content\node_content\" />
+    <Folder Include="app\static\app\content\node_content\Modules\" />
+    <Folder Include="app\static\app\content\node_content\Modules\images\" />
+    <Folder Include="app\static\app\content\node_content\Membership Management\" />
+    <Folder Include="app\static\app\content\node_content\Membership Management\images\" />
+    <Folder Include="app\static\app\content\node_content\conexion\images\" />
+    <Folder Include="app\static\app\content\node_content\conexion\" />
+    <Folder Include="app\static\app\fonts\" />
+    <Folder Include="app\static\app\scripts\" />
+    <Folder Include="app\templates\" />
+    <Folder Include="app\templates\app\" />
+    <Folder Include="netsuite\" />
+    <Folder Include="netsuite\netsuitechromext\" />
+    <Folder Include="netsuite\netsuitechromext\img\" />
+    <Folder Include="netsuite\netsuiteAPI\" />
+    <Folder Include="SupportFlow\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\static\app\content\jquery.navgoco.css" />
+    <Content Include="app\static\app\content\metisMenu.css" />
+    <Content Include="app\static\app\content\node_content\Modules\images\1.jpg" />
+    <Content Include="app\static\app\content\node_content\Modules\images\2.jpg" />
+    <Content Include="app\static\app\content\node_content\Modules\images\3.jpg" />
+    <Content Include="app\static\app\content\node_content\Modules\images\4.jpg" />
+    <Content Include="app\static\app\content\node_content\Modules\images\5.jpg" />
+    <Content Include="app\static\app\content\node_content\Membership Management\images\1.jpg" />
+    <Content Include="app\static\app\content\node_content\Membership Management\images\2.jpg" />
+    <Content Include="app\static\app\content\node_content\Membership Management\images\3.jpg" />
+    <Content Include="app\static\app\content\node_content\Membership Management\images\4.jpg" />
+    <Content Include="app\static\app\content\node_content\Membership Management\images\5.jpg" />
+    <Content Include="app\static\app\content\node_content\conexion\images\5.jpg" />
+    <Content Include="app\static\app\content\base.css" />
+    <Content Include="app\static\app\content\node_content\conexion\images\1.jpg" />
+    <Content Include="app\static\app\content\images\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="app\static\app\content\images\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="app\static\app\content\images\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="app\static\app\content\images\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="app\static\app\content\images\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="app\static\app\content\images\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="app\static\app\content\images\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="app\static\app\content\images\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="app\static\app\content\images\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="app\static\app\content\images\images\ui-icons_222222_256x240.png" />
+    <Content Include="app\static\app\content\images\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="app\static\app\content\images\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="app\static\app\content\images\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="app\static\app\content\images\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="app\static\app\content\node_content\conexion\images\2.jpg" />
+    <Content Include="app\static\app\content\node_content\conexion\images\3.jpg" />
+    <Content Include="app\static\app\content\images\tree.jpg" />
+    <Content Include="app\static\app\content\node_content\conexion\images\4.jpg" />
+    <Content Include="app\static\app\content\jquery-ui.css" />
+    <Content Include="app\static\app\content\jquery-ui.structure.css" />
+    <Content Include="app\static\app\content\jquery-ui.theme.css" />
+    <Content Include="app\static\app\scripts\empmain.js" />
+    <Content Include="app\static\app\scripts\flow.js" />
+    <Content Include="app\static\app\scripts\form-handler.js" />
+    <Content Include="app\static\app\scripts\jquery-1.11.1.js" />
+    <Content Include="app\static\app\scripts\jquery-ui.js" />
+    <Content Include="app\static\app\scripts\jquery.navgoco.js" />
+    <Content Include="app\static\app\scripts\modal-init.js" />
+    <Content Include="app\static\app\scripts\plugin-boilerplate.js" />
+    <Content Include="app\static\app\scripts\tab-manager.js" />
+    <Content Include="app\static\app\scripts\timer.js" />
+    <Content Include="app\templates\app\base.html" />
+    <Content Include="app\templates\app\flow.html" />
+    <Content Include="netsuite\netsuiteAPI\nsapi.js" />
+    <Content Include="netsuite\netsuitechromext\background.html" />
+    <Content Include="netsuite\netsuitechromext\img\icon.png" />
+    <Content Include="netsuite\netsuiteAPI\MfsNsIntelliSense.min.js" />
+    <Content Include="netsuite\netsuitechromext\nsjiraajax.js" />
+    <Content Include="netsuite\netsuitechromext\jirasearch.js" />
+    <Content Include="netsuite\netsuitechromext\jquery.js" />
+    <Content Include="netsuite\netsuitechromext\manifest.json" />
+    <Content Include="netsuite\netsuitechromext\popup.html" />
+    <Content Include="requirements.txt" />
+    <Content Include="app\templates\app\empmain.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.mht">
+      <SubType>WebBrowser</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>{66c03bdb-595b-4b44-8bab-ddaffe471049}</Id>
+      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
+      <Version>2.7</Version>
+      <Description>env (Python 64-bit 2.7)</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <LibraryPath>Lib\</LibraryPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>Amd64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

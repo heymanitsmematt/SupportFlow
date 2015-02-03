@@ -1,0 +1,282 @@
+﻿
+body { 
+    margin : 0px;
+    background-color : rgba(52, 46, 46, 0.50);
+}
+
+table, th, td {
+    border : 1px solid black;
+}
+table{
+    margin-left : 10px;
+    margin-top : 10px
+}
+
+a#login {
+    float : right;
+    margin-right : 5%;
+}
+
+#header {
+    position : fixed;
+    background-color : black;
+    width : 100%;
+    border : 1px solid #CCC;  
+    height : 35px;
+    top : 0px;  
+}
+
+.header_link {
+    color : lightgray;
+    margin-left : 5%;
+    font-size : large;
+}
+
+#content {
+    position : relative;
+    background-position : top;
+    margin-top : 40px;
+}
+
+#software_name {
+    text-align : center;
+    position: static;
+}
+
+#wrapper {
+    width : 100%;
+}
+
+/*main div presentation*/
+#menu-toggle-hide {
+    margin-top : 10px;
+    padding-left : 10px;
+}
+
+#menu-toggle-show {
+    margin-top : 10px;
+    margin-left : 10px;
+    display : none;
+}
+
+#nodes {
+    background-size : cover;
+    background-color : rgba(13, 11, 11, 0.7);
+    border-radius : 15px;
+    background-repeat : no-repeat;
+    width : 250px;
+    height : 600px;
+    padding : 5px;
+    margin-left : 0px;
+    float : left;
+    box-shadow: 10px 10px 5px black;
+}
+
+#nodes a {
+    color : lightgray;
+}
+
+#node_details {
+    float : right;  
+    position : static;
+    margin-right : 10px;
+    background-color : rgba(13, 11, 11, 0.7);
+    padding : 5px;
+    border-radius : 15px;
+    height : 600px;
+    width : 750px;
+    overflow : visible;
+    box-shadow: 10px 10px 5px black;
+}
+
+
+/*menu items*/  
+#menu-menu li ul {
+    display : none;
+    list-style : outside;
+}
+
+ul li {
+    list-style-type : none;
+}
+
+#menu-menu {
+    
+}
+
+/*Timer Management*/
+#start-timer, #pause-timer {
+    float: right;
+    margin-right : 25px;
+}
+
+#timer, #time {
+    float: right;
+    margin-right : 25px;
+}
+
+/*Tab Presentation*/
+ul.tabs {
+    float : left;
+    color : lightgray;
+}
+/*
+div#content-frame{
+    display: none;
+}
+ */
+
+/*photo viewer presentation*/
+.slide-viewer {
+    float : left;
+    position : static;
+    overflow : hidden;
+    height : 325px;
+    width : 400px;
+    border-radius : 15px;
+}
+
+.slide-group {
+    height : 100%;
+    position : relative;
+
+}
+
+.slide-group img {
+    height : 300px;
+    margin-top : 5px;
+    border-radius : 15px;
+}
+
+.slide {
+    height : 100%;
+    width : 100%;
+    display : none;
+    position : relative;
+    padding-top : 5px;
+    padding-left: 20px;
+    border-radius : 15px;
+}
+
+.slide img {
+    border-radius : 15px;
+    width : 95%;
+}
+
+.slide-buttons { 
+    position : relative;
+    margin-left : 145px;
+}
+
+.slide:first-child {
+    display : block;
+
+}
+
+
+/* node details */
+#tutorials h3 {
+    position : static;
+    right : 5px;
+    width : auto;
+    margin-left : 25%;
+    color : lightgray;
+}
+
+
+#tutorial .description {
+    position : relative;
+    right : 5px;
+    left : 10px;
+    height : 80px;
+    color : lightgray;
+}
+
+#tutorial .details {
+    position : relative;
+    right : 5px;
+    left : 10px;
+    height : 400px;
+    color : lightgray;
+}
+
+/*Modal attributes*/
+.modal {
+    position : absolute;
+    z-index : 10000;
+    background-color : rgba(177,177,177,.9);
+}
+
+.modal-content {
+    margin-top : 10%;
+    margin-left : 25%;
+    background-color : rgb(232,232,232);
+    height : 550px;
+    width : 600px;
+    border-radius : 15px;
+}
+
+#edit {
+    float: left;
+    color : rgb(13,11,11)
+}
+
+#edit-modal #edit_node, #create_node {
+    margin-left : 110px;
+    margin-top : 200px;
+}
+
+#edit-submit {
+    float : right;;
+    margin-right : 10px;
+}
+
+#edit-form {
+    margin-top : 10px;
+    margin-left : 10px;
+    float : left;
+}
+
+#edit-form p, #tier-select, #node-select{
+    margin-left : 10px;
+}
+
+
+#node_description {
+    width : 550px;
+    height : 100px;
+    float : left;
+    margin-left : 10px;
+    margin-right : 10px;
+    margin-bottom : 10px;
+}
+
+#text-details {
+    float : left;
+    width : 550px;
+    height : 220px;
+    margin-left : 10px;
+    margin-right : 10px;
+    margin-bottom : 10px;
+}
+
+#new-node-form {
+    margin-top : 20px;
+    margin-left : 20px;
+}
+
+#new-node-form input {
+    border-radius : 5px;
+}
+
+.new-node-form-focus {
+    background-color : black; 
+}
+
+
+
+
+
+
+
+

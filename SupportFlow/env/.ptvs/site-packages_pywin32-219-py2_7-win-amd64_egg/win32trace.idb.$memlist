@@ -1,0 +1,16 @@
+GetHandle
+GetTracer
+InitRead
+InitWrite
+TermRead
+TermWrite
+__doc__
+__file__
+__name__
+__package__
+blockingread
+error
+flush
+read
+setprint
+write

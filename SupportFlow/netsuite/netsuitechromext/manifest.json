@@ -1,0 +1,43 @@
+{
+    "manifest_version": 2,
+    "name": "Netsuite to Jira Search",
+    "version": "1.0.1",
+
+    "background": {
+        "persistent": false,
+        "scripts": [ "jirasearch.js" ]
+    },
+
+    "content_scripts": [
+        {
+            "matches": [ "https://system.netsuite.com/*",
+                         "http://localhost/*"
+            ],
+            "js": [ "jquery.js", "nsjiraajax.js" ]
+        }
+    ],
+
+    "page_action": {
+        "default_icon": { "16": "buzz-little.png" },
+        "default_title": "Netsuite to Jira Context Menu Search",
+        "default_popup": "popup.html"
+    },
+
+    "permissions": [
+        "tabs",
+        "contextMenus",
+        "http://jira.motionsoft.com:8080/",
+        "https://system.netsuite.com/*",
+        "clipboardWrite",
+        "cookies",
+        "debugger"
+    ],
+
+    "externally_connectable": {
+        "matches": [ "http://jira.motionsoft.com:8080/"
+                         //Add SupportKB address
+        ]
+    }
+
+
+}

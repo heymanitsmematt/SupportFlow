@@ -1,0 +1,15 @@
+C:\Users\mwillis\documents\visual studio 2013\Projects\SupportFlow\SupportFlow\bin\Microsoft.PythonTools.WebRole.dll
+C:\Users\mwillis\documents\visual studio 2013\Projects\SupportFlow\SupportFlow\bin\AzureSetup.cfg
+C:\Users\mwillis\documents\visual studio 2013\Projects\SupportFlow\SupportFlow\bin\Microsoft.PythonTools.AzureSetup.exe
+C:\Users\mwillis\documents\visual studio 2013\Projects\SupportFlow\SupportFlow\bin\Microsoft.PythonTools.AzureSetup.exe.config
+C:\Users\mwillis\documents\visual studio 2013\Projects\SupportFlow\SupportFlow\bin\wfastcgi.py
+C:\Users\mwillis\documents\visual studio 2013\Projects\SupportFlow\SupportFlow\obj\Debug\deployment-updated-orig-prefix.txt
+C:\Users\mwillis\documents\visual studio 2013\Projects\SupportFlow\SupportFlow\ptvs_virtualenv_proxy.py
+C:\Users\mwillis\documents\visual studio 2013\Projects\SupportFlow\SupportFlow\obj\Debug\web.config
+C:\Users\mwillis\documents\visual studio 2013\Projects\SupportFlow\SupportFlow\obj\Debug\web.debug.config
+C:\Users\mwillis\documents\visual studio 2013\Projects\SupportFlow\SupportFlow\obj\Debug\attach_server.py
+C:\Users\mwillis\documents\visual studio 2013\Projects\SupportFlow\SupportFlow\obj\Debug\visualstudio_py_debugger.py
+C:\Users\mwillis\documents\visual studio 2013\Projects\SupportFlow\SupportFlow\obj\Debug\visualstudio_py_repl.py
+C:\Users\mwillis\documents\visual studio 2013\Projects\SupportFlow\SupportFlow\obj\Debug\visualstudio_py_util.py
+C:\Users\mwillis\documents\visual studio 2013\Projects\SupportFlow\SupportFlow\obj\Debug\__init__.py
+C:\Users\mwillis\documents\visual studio 2013\Projects\SupportFlow\SupportFlow\obj\Debug\__main__.py

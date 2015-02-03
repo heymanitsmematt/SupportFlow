@@ -1,0 +1,64 @@
+Metadata-Version: 2.0
+Name: django-mssql
+Version: 1.6.1
+Summary: Django backend database support for MS SQL Server.
+Home-page: https://bitbucket.org/Manfre/django-mssql
+Author: Michael Manfre
+Author-email: mmanfre@gmail.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Framework :: Django
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Topic :: Internet :: WWW/HTTP
+
+Django MSSQL Database Backend
+=============================
+
+`Django-mssql`_ provies a Django database backend for Microsoft SQL Server.
+
+Documentation is available at `django-mssql.readthedocs.org`_.
+
+Requirements
+------------
+
+    * Python 2.7
+    * PyWin32_
+    * SQL Server Management Studio or Microsoft Data Access Components (MDAC)
+
+SQL Server Versions
+-------------------
+
+Supported Versions:
+    * 2008
+    * 2008r2
+    * 2012
+
+The SQL Server version will be detected upon initial connection.
+
+Django Version
+--------------
+
+	* Django 1.6
+	* Django 1.7 (schema migrations may not be fully supported)
+
+
+django-mssql 1.4 supports Django 1.4 and 1.5.
+
+
+References
+----------
+
+    * Django-mssql on PyPi: http://pypi.python.org/pypi/django-mssql
+    * DB-API 2.0 specification: http://www.python.org/dev/peps/pep-0249/
+
+
+.. _`Django-mssql`: https://bitbucket.org/Manfre/django-mssql
+.. _django-mssql.readthedocs.org: http://django-mssql.readthedocs.org/
+.. _PyWin32: http://sourceforge.net/projects/pywin32/
+
+

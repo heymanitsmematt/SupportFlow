@@ -1,0 +1,50 @@
+Ä}qUmembersq}q(UFEATURE_PROTOCOL_LOCKDOWNq}q(UkindqUdataqUvalueq}q	Utypeq
+]qU__builtin__qUintÜqasuUFEATURE_OBJECT_CACHINGq}q(hhh}qh
+]qhasuUCoInternetIsFeatureEnabledq}q(hUfunctionqh}qU	overloadsqNsuUFEATURE_RESTRICT_FILEDOWNLOADq}q(hhh}qh
+]qhasuU GET_FEATURE_FROM_THREAD_INTRANETq}q(hhh}qh
+]qhasuUFEATURE_ADDON_MANAGEMENTq}q (hhh}q!h
+]q"hasuUGET_FEATURE_FROM_THREAD_TRUSTEDq#}q$(hhh}q%h
+]q&hasuUSET_FEATURE_ON_THREAD_TRUSTEDq'}q((hhh}q)h
+]q*hasuUIID_IInternetBindInfoq+}q,(hhh}q-h
+]q.hUPyIIDÜq/asuUIID_IInternetProtocolInfoq0}q1(hhh}q2h
+]q3h/asuUFEATURE_SECURITYBANDq4}q5(hhh}q6h
+]q7hasuUFEATURE_MIME_SNIFFINGq8}q9(hhh}q:h
+]q;hasuU$GET_FEATURE_FROM_THREAD_LOCALMACHINEq<}q=(hhh}q>h
+]q?hasuUIID_IInternetProtocolRootq@}qA(hhh}qBh
+]qCh/asuU"GET_FEATURE_FROM_THREAD_RESTRICTEDqD}qE(hhh}qFh
+]qGhasuU__package__qH}qI(hhh}qJh
+]qKhUNoneTypeÜqLasuUSET_FEATURE_ON_PROCESSqM}qN(hhh}qOh
+]qPhasuUIID_IHTMLOMWindowServicesqQ}qR(hhh}qSh
+]qTh/asuUGET_FEATURE_FROM_REGISTRYqU}qV(hhh}qWh
+]qXhasuUFEATURE_BEHAVIORSqY}qZ(hhh}q[h
+]q\hasuUFEATURE_WEBOC_POPUPMANAGEMENTq]}q^(hhh}q_h
+]q`hasuUCoInternetCreateSecurityManagerqa}qb(hhh}qchNsuU__doc__qd}qe(hhh}qfh
+]qghLasuUGET_FEATURE_FROM_PROCESSqh}qi(hhh}qjh
+]qkhasuU GET_FEATURE_FROM_THREAD_INTERNETql}qm(hhh}qnh
+]qohasuUIID_IDocHostUIHandlerqp}qq(hhh}qrh
+]qsh/asuUFEATURE_RESTRICT_ACTIVEXINSTALLqt}qu(hhh}qvh
+]qwhasuU__file__qx}qy(hhh}qzh
+]q{hUstrÜq|asuUIID_IInternetSecurityManagerq}}q~(hhh}qh
+]qÄh/asuUIID_IInternetProtocolSinkqÅ}qÇ(hhh}qÉh
+]qÑh/asuU"SET_FEATURE_ON_THREAD_LOCALMACHINEqÖ}qÜ(hhh}qáh
+]qàhasuU SET_FEATURE_ON_THREAD_RESTRICTEDqâ}qä(hhh}qãh
+]qåhasuUFEATURE_LOCALMACHINE_LOCKDOWNqç}qé(hhh}qèh
+]qêhasuU__name__që}qí(hhh}qìh
+]qîh|asuUFEATURE_DISABLE_MK_PROTOCOLqï}qñ(hhh}qóh
+]qòhasuUIID_IInternetPriorityqô}qö(hhh}qõh
+]qúh/asuUFEATURE_WINDOW_RESTRICTIONSqù}qû(hhh}qüh
+]q†hasuUIID_IInternetProtocolq°}q¢(hhh}q£h
+]q§h/asuUFEATURE_SAFE_BINDTOOBJECTq•}q¶(hhh}qßh
+]q®hasuUSET_FEATURE_ON_THREAD_INTRANETq©}q™(hhh}q´h
+]q¨hasuUSET_FEATURE_ON_THREAD_INTERNETq≠}qÆ(hhh}qØh
+]q∞hasuUSET_FEATURE_IN_REGISTRYq±}q≤(hhh}q≥h
+]q¥hasuUCoInternetSetFeatureEnabledqµ}q∂(hhh}q∑hNsuUGET_FEATURE_FROM_THREADq∏}qπ(hhh}q∫h
+]qªhasuUFEATURE_ZONE_ELEVATIONqº}qΩ(hhh}qæh
+]qøhasuUFEATURE_VALIDATE_NAVIGATE_URLq¿}q¡(hhh}q¬h
+]q√hasuUFEATURE_MIME_HANDLINGqƒ}q≈(hhh}q∆h
+]q«hasuUFEATURE_ENTRY_COUNTq»}q…(hhh}q h
+]qÀhasuUFEATURE_UNC_SAVEDFILECHECKqÃ}qÕ(hhh}qŒh
+]qœhasuU&FEATURE_GET_URL_DOM_FILEPATH_UNENCODEDq–}q—(hhh}q“h
+]q”hasuU&FEATURE_HTTP_USERNAME_PASSWORD_DISABLEq‘}q’(hhh}q÷h
+]q◊hasuUSET_FEATURE_ON_THREADqÿ}qŸ(hhh}q⁄h
+]q€hasuus.
