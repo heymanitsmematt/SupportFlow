@@ -10,7 +10,7 @@ class EmailTroller:
     def __init__(self):
         parser = HTMLParser.HTMLParser()
         email = 'mwillis@motionsoft.net'
-        password = '8Richard&'
+        password = '8richarD7'
         self.url = 'https://outlook.office365.com/ews/odata/Me/Folders/JunkEmail/Messages'
         self.params = {'$orderby':'DateTimeReceived desc', '$top' : '25', '$select' : 'Subject,Body'}
         while 1:
