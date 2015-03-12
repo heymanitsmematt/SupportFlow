@@ -184,7 +184,17 @@ class Node_5Manager(models.Manager):
 class EmailTrollerModel(models.Model):
     last_ticket_received = models.CharField(max_length = 500, null = True)
 
-
+'''
+class TicketsTodayManager(models.Manager):
+    def get_queryset(self):
+	qs = []
+        for tic in self.objects.all():
+	    ds = tic.open_date.split('/')
+	    if datetime.date.today() == datetime.date(int(ds[2]), int(ds[0]), int(ds[1])):
+		qs.append(tic.id)
+	    return super(TicketsTodayManager, self).get_queryset().filter(id in qs)
+	return qs	
+'''
 #ticket class
 class Ticket(models.Model):
     netsuite_id = models.IntegerField(null = True)
@@ -210,6 +220,34 @@ class Ticket(models.Model):
     jira_issue = models.CharField(max_length = 100, null = True)
     jira_issue_status = models.CharField(max_length = 100, null = True)
     most_recent_comment = models.CharField(max_length = 10000, null = True)
+    ticket_time = models.CharField(max_length = 1000, null=True)
+    #tickets_today = TicketsTodayManager()
+
+    def totalTicketTime(self):
+	try:
+	    totHrs = float()
+	    totMins = float()
+	    allTimes = self.ticket_time.split(',')
+	    for t in allTimes:
+		thisTime = t[t.find(':')-2:t.find(':')+3]
+		hr, mins = thisTime.split(':')
+		totHrs += float(hr)
+		totMins += float(mins)
+	    if totMins > 60:
+		totHrs += totMins // 60
+		totMins = totMins - (totMins // 60 * 60)
+	    if len(str(int(totMins))) == 1:
+		strMins = '0'+ str(int(totMins))
+	    else:
+		strMins = str(int(totMins))
+	    return str(int(totHrs))+':'+ strMins
+	except:
+	    return 'No Time Entered'
+
+    class Meta:
+	ordering = ['open_date']
+    
+
     
 class JiraTicket(models.Model):
     netsuite_key = models.ManyToManyField(Ticket, null=True)

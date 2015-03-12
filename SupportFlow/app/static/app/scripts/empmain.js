@@ -3,6 +3,7 @@
 
 $(document).ready(function() {
     emp = new Employee();
+    emp.onLoad();
     ticketData = new Object;
     emp.updateTrackedTicketStatus();
     ticketData.nsTicketsWithJiraIssues = function() {
@@ -14,10 +15,57 @@ $(document).ready(function() {
 					    });
 					    return escs;
 					};
-    $('#quickviewrefresh').on('click',emp.widgets.nsJiraQuickView(ticketData.nsTicketsWithJiraIssues));
-
+    
     function Employee() {
         self.this;
+	self.onLoad = function(){
+            $('#masterJiraSyncFile').click(function() {
+                $.get('/masterJiraSyncFile', function (data){
+                    alert(data)
+                });
+            });
+			$('#getTicketsToday').click(function(){
+			    $.get('/getTicketsToday', function (data){
+				alert(data);
+			    });
+			});
+			widgets = new Array();
+			widgetButtons = new Array();
+			widgetButtons[0] = $('#jira_widget_button')
+			widgetButtons[1] = $('#active_widget_button')
+			widgetButtons[2] = $('#tickets_today_widget_button')
+			widgets[0] = $('#tracked_ticket_table')
+			widgets[1] = $('#open_ticket_table')
+			widgets[2] = $('#tickets_today_table')
+			$(widgets).each(function() {
+			    $(this).hide()
+			});
+			$(widgetButtons).each(function() {
+			    $(this).on('click', function() {
+			        switch($(this).text()) {
+				    case widgetButtons[0].text():
+					tgt = 0
+					break
+				    case widgetButtons[1].text():
+					tgt = 1
+					break
+				    case widgetButtons[2].text():
+					tgt = 2
+					break
+				}
+				tgtw = widgets[tgt]
+				/*
+				widgets.pop(tgt)
+				$(widgets).each(function() {
+				    $(this).hide()
+				})
+				*/
+				$(tgtw).toggle('slow');
+				widgets[tgt] = tgtw
+			    });		
+		        })
+		    };
+	
 	self.rawData = [];
 	self.updateTrackedTicketStatus = function() {
 		        $.getJSON('/updateTrackedTickets/', function(data) {
@@ -87,6 +135,11 @@ $(document).ready(function() {
 						    };
 						});
 			    		};
+	self.functions.getTicketsToday = function() {
+					    $.get('/getTicketsToday', function(data) {
+					        return data;
+					    });
+					};
 	self.widgets = new Object;
 	self.widgets.nsJiraQuickView = function(qvData){
 					    str = "";

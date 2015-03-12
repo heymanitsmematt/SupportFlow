@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from app import views
 from app.models import *
+from api.views import getTicketInfo, getTicketsToday, masterJiraSyncFile#, masterNetsuiteSyncFile
 
 
 admin.autodiscover()
@@ -18,5 +19,10 @@ urlpatterns = patterns('',
     url(r'^saveNetsuiteTicket/$', views.saveNetsuiteTicket, name='saveNetsuiteTicket'),
     url(r'^updateNetsuiteTickets/$', views.updateNetsuiteTickets, name='updateNetsuiteTickets'),
     url(r'^refreshJiraFromNs/$', views.refreshJiraFromNs, name = 'refreshJiraFromNS'), 
+    url(r'^ticketTable/$', views.TicketList.as_view()),
+    url(r'^getTicketInfo/$', getTicketInfo, name='getTicketInfo'),
+    url(r'^getTicketsToday/$', getTicketsToday, name='getTicketsToday'),
+    url(r'^masterJiraSyncFile/$', masterJiraSyncFile),
+    #url(r'^masterNetsuiteSyncFile/$', masterNetsuiteSyncFile)
     url(r'^admin/', include(admin.site.urls)),
     )

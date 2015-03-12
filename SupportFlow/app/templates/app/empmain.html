@@ -1,21 +1,91 @@
 {% extends "app/base.html" %}
+{% load render_table from django_tables2 %}
 {% block content %}
-<a href='' id='quickviewrefresh'>Refresh Widget</a>
-<div class="ticket_outline_wrapper">
-    <div id = ticket_outline>
-	<table id = ticket_outline_table>
-	</table>
-    </div>
-    <div>
-	<table id = 'jira_status_table'>
-	</table>
-    </div>
-    <div id ="jira_netsuite_quickview_widget">
-        <table id="jira_netsuite_quickview_widget_table">
-	</table>
-    </div>
-    <div id = "d3div">
-	
-    </div>
+<button  type="button" id='jira_widget_button' class='widget_button'>NS/JIRA View</button> <br /> <button type="button" id='active_widget_button' class='widget_button'>Active Tickets</button><br /><button type="button" id="tickets_today_widget_button" class="widget_button">Tickets With Time</button><br /><button type='button' id='getTicketsToday'>Refresh Database</button><button type="button" id="masterJiraSyncFile">Gen. Jira Sync File</button>
+<form action="/ticketTable/?sort=-id">
+<input type="submit" value="Go To Dynamic Ticket Table!">
+</form>
+<div id='tracked_tickets'>
+    <table id='tracked_ticket_table'>
+	<tr>
+	    <td><strong>Netsuite Ticket Number</strong></td>
+	    <td><strong>Open Date</strong></td>
+	    <th>Opened By</th>
+	    <td><strong>Assigned To</strong></td>
+	    <td><strong>Escalated To</strong></td>
+	    <td><strong>Status</strong></td>
+	    <td><strong>Jira Status</strong></td>
+	    <td><strong>Jira Issue</strong></td>
+	    <td><strong>Total NS Ticket Time</strong></td>
+	</tr>
+	{% for tt in openTrackedTickets %}
+	<tr>
+	    <td><a href="https://system.netsuite.com/app/crm/support/supportcase.nl?id={{tt.netsuite_id}}">{{ tt.netsuite_case_number }}</a></td>
+	    <td>{{ tt.open_date }}</td>
+	    <td>{{ tt.opened_by }}</td>
+	    <td>{{ tt.assigned_to }} </td>
+	    <td>{{ tt.escalated_to }} </td>
+	    <td>{{ tt.status }}</td>
+	    <td>{{ tt.jira_issue_status }}</td>
+	    <td><a href="http://jira.motionsoft.com:8080/browse/{{tt.jira_issue}}">{{ tt.jira_issue }}</a></td>
+	    <td>{{ tt.totalTicketTime }}</td>
+	</tr>
+	{% endfor %}
+    </table>
+</div>
+<div>
+    <table id='open_ticket_table'>
+	<tr>
+	    <td><strong>Netsuite Ticket Number</strong></td>
+	    <td><strong>Customer</strong></td>
+	    <td><strong>Assigned To</strong></td>
+	    <td><strong>Status</strong></td>
+	    <td><strong>Open Date</strong></td>
+	    <td><strong>Short Description</strong></td>
+	    <td><strong>Total Ticket Time</strong></td>
+	    <td>
+	</tr>
+	{% for at in activeTickets%}
+	<tr>
+	    <td><a href="https://system.netsuite.com/app/crm/support/supportcase.nl?id={{at.netsuite_id}}">{{at.netsuite_case_number}}</a></td>
+	    <td>{{at.customer}}</td>
+	    <td>{{at.assigned_to}}</td>
+	    <td>{{at.status}}</td>
+	    <td>{{at.open_date}}</td>
+	    <td>{{at.short_description}}</td>
+	    <td>{{at.totalTicketTime}}</td>
+	</tr>
+	{%endfor%}
+    </table>
+</div>
+<div>
+    <table id='tickets_today_table'>
+	<tr>
+	    <td><strong>Netsuite Ticket Number</strong></td>
+	    <td><strong>Customer</strong></td>
+	    <td><strong>Product</strong></td>
+	    <td><strong>Assigned To</strong></td>
+	    <td><strong>Status</strong></td>
+	    <td><strong>Open Date</strong></td>
+	    <td><strong>Short Description</strong></td>
+	    <td><strong>Total Ticket Time</strong></td>
+	    <td>
+	</tr>
+	{% for tt in ticketsWithTime%}
+	<tr>
+	    <td><a href="https://system.netsuite.com/app/crm/support/supportcase.nl?id={{tt.netsuite_id}}">{{tt.netsuite_case_number}}</a></td>
+	    <td>{{tt.customer}}</td>
+	    <td>{{tt.product}}</td>
+	    <td>{{tt.assigned_to}}</td>
+	    <td>{{tt.status}}</td>
+	    <td>{{tt.open_date}}</td>
+	    <td>{{tt.short_description}}</td>
+	    <td>{{tt.totalTicketTime}}</td>
+	</tr>
+	{%endfor%}
+    </table>
+</div>
+<div>
+
 </div>
 {% endblock %}

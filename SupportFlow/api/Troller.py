@@ -13,6 +13,7 @@ class EmailTroller:
         password = '8richarD7'
         self.url = 'https://outlook.office365.com/ews/odata/Me/Folders/JunkEmail/Messages'
         self.params = {'$orderby':'DateTimeReceived desc', '$top' : '25', '$select' : 'Subject,Body'}
+	i = 0
         while 1:
             try:
                 self.mostRecentEmail = requests.get(self.url, params=self.params, auth=(email,password))
@@ -35,12 +36,14 @@ class EmailTroller:
 		self.ticketJSON = simplejson.dumps(dicty)
 
 		r = requests.post("http://10.89.30.244/saveNetsuiteTicket/", data=dicty)
-                
-                print "trolled for", dicty['caseNumber'], r
+                i += 1   
+                #print "trolled for", dicty['caseNumber'], r, i
 	
             except:
-                print "passed", sys.exc_info()[0] 
+                #print "passed", sys.exc_info()[0] 
+		i += 1
                 pass
-            sleep(10)
+            sleep(1)
 
-troll = EmailTroller()
+if __name__ == "__main__":
+    troll = EmailTroller()

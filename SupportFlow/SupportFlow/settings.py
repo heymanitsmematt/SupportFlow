@@ -124,6 +124,13 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+#mostly added for django-tables
+TEMPLATE_CONTEXT_PROCESSORS= (
+    'django.core.context_processors.request',
+    'django.core.context_processors.static',
+    'django.contrib.auth.context_processors.auth',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -146,6 +153,8 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
+EXCEL_SUPPORT = 'xlwt'
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -154,9 +163,14 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'api',
     'SupportFlow',
+    'django_tables2',
+    'django_tables2_reports',
+    'import_export',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    #'django.contrib.auth.context_processors.auth',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -189,4 +203,16 @@ LOGGING = {
         },
     }
 }
+
+
+#thread for api.Troller, Netsuite Ticket collecting module
+import threading
+from api.Troller import EmailTroller
+def troll():
+    t=EmailTroller()
+thr = threading.Thread(target=troll)
+thr.start()
+
+
+
 

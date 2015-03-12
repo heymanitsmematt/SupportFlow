@@ -18,21 +18,35 @@ from jira.exceptions import JIRAError
 from jira.client import JIRA
 import json
 from api.cookies import nsver, jsessionid
-
+from api.NetsuiteUpdate import *
+from app.tables import TicketTable
+from django_tables2 import RequestConfig, SingleTableView
+from django_tables2_reports.views import ReportTableView
 
 PROJECT_ROOT = path.dirname(path.abspath(path.dirname(__file__)))
 jira_username = 'mwillis'
-jira_password = '8Richard&'
+jira_password = '8richarD7'
+
+class TicketList(ReportTableView):
+    model = Ticket
+    table_class = TicketTable
 
 def empmain(request):
     template_name = 'app/empmain.html'
     tickets = Ticket.objects.all()
-
-    data = list(tickets)
-
-    json = serializers.serialize('json', data) 
-
-    return render_to_response(template_name, {'tickets': tickets}, context_instance = RequestContext(request)) 
+    openTrackedTickets = Ticket.objects.order_by('-netsuite_case_number').all().filter(jira_issue__isnull=False).filter(status='Tracked')
+    activeTickets = Ticket.objects.order_by('-netsuite_case_number').all().filter(status='Active')
+    jiraIssues = JiraTicket.objects.all()
+    ticketsWithTime = Ticket.objects.all().filter(ticket_time__isnull=False).exclude(ticket_time='')
+    ticketsToday = []
+    for ttod in tickets:
+	try:
+	    ttoddt = ttod.open_date.split('/')
+	    if datetime.date(int(ttoddt[2]), int(ttoddt[0]), int(ttodt[1])) == datetime.date.today():
+	        ticketsToday.append(ttod)
+	except: pass
+   
+    return render_to_response(template_name, {'ticketsToday':ticketsToday,'ticketsWithTime':ticketsWithTime,'activeTickets':activeTickets,'tickets': tickets,'openTrackedTickets':openTrackedTickets,'jiraIssues':jiraIssues}, context_instance = RequestContext(request)) 
 
 def ticket(request):
     tickets = Ticket.objects.all()
@@ -92,8 +106,12 @@ def saveNetsuiteTicket(request):
 	thisTicket.opened_by = postData['openedBy']
 	thisTicket.first_call_resolution = postData['firstCallResolution']
 	thisTicket.last_updated = postData['lastUpdated']
-	thisTicket.jira_issue = postData['jiraIssue']
+	if postData['jiraIssue'].find('`') != -1:
+	    thisTicket.jira_issue = postData['jiraIssue'].replace('`',',')
+	else:
+	    thisTicket.jira_issue = postData['jiraIssue']
 	thisTicket.most_recent_comment = postData['mostRecentComment']
+	thisTicket.ticket_time = postData['ticketTime'].replace('~',':').replace('`',',')
 
     	thisTicket.save()   
 	i += 1    
@@ -104,60 +122,35 @@ def saveNetsuiteTicket(request):
     return HttpResponse({'msg':'success?'}, content_type = 'application/json')
 
 def updateNetsuiteTickets(request):
-    ticket = Ticket
-    skeletonTickets = ticket.objects.filter(netsuite_case_number__exact = 0).values() 
-    
-    updater = restletUpdater(skeletonTickets)
-    print updater.ticketsOut() 
-    try:
-        for ticket in updater.ticketsOut():
-	    try:
-	        thisTicket = ticket.objects.get(id = ticket.kbId) 
-   	        print thisTicket
-	        thisTicket.company = ticket.company
-    	        thisTicket.netsuite_case_number = ticket.nsCaseNumber
-	        thisTicket.save()
-	    except:
-	        print "could not find/save ticket", ticket
-	msg = {}
-	msg["msg"] = "returned restlet successfully"
-    except:
-	msg=sys.exc_info()[0]
-	#simplejson.dumps(msg)
-	#with open('/./SupportFlow/SupportFlow/testlog.txt', 'w+') as theFile:
-	    #theFile.write(str(sys.exc_info()[0]))
-	    #theFile.write(skeletonTickets)
-	
-    return HttpResponse(msg, content_type='application/json')
-
-class restletUpdater:
-    def __init__(self, ticketsIn):
-        self.ticketsIn = ticketsIn
-
-    def ticketsOut(self):
-        requestDict = {}
-	headers = {}
-	cookies = {}
-	cookies['NS_VER'] = nsver
-	cookies['JSESSIONID'] = jsessionid
-	headers['Authorization'] = 'NLAuth nlauth_account=926273,nlauth_email=mwillis@motionsoft.net,nlauth_signature=@Power88cake,nlauth_role=3'
-	headers['Content-Type'] = 'application/json'
-	headers['Accept'] = 'application/json'
-        for ticket in self.ticketsIn:
-	    thisTicketDict = {}
-	    thisTicketDict['kbId'] = ticket['id']
-	    thisTicketDict['openDate'] = ticket['open_date']
-	    thisTicketDict['shortDescription'] = ticket['short_description']
-	    requestDict[ticket['id']] = thisTicketDict
-        requestJSON = simplejson.dumps(requestDict)
-	#with open('/requestlog.txt', 'w+') as logFile:
-	    #logFile.write(requestJSON)
-        updatedResults = requests.post('https://rest.netsuite.com/app/site/hosting/restlet.nl?script=31&deploy=1', data=requestJSON, headers=headers, cookies=cookies)
-        ticketsOut = updatedResults.raw
-
-        return ticketsOut
-	
-
+    m = MassNetsuiteGet('all') 
+    m.post()
+    i=0
+    for ticket in m.tickets:
+	thisTicket = Ticket.objects.get_or_create(netsuite_id = ticket['id'])[0]
+	thisTicket.customer = ticket['columns']['company']['name']
+	try:
+	    thisTicket.caller = ticket['columns']['contact']['name']
+	except:
+	    thisTicket.caller = 'Anonymous'
+	thisTicket.short_description = ticket['columns']['title']
+	try:
+	    thisTicket.product = ticket['columns']['product']['name']
+	except: pass
+	thisTicket.netsuite_case_number = ticket['columns']['casenumber']
+	thisTicket.case_type = ticket['columns']['category']['name']
+	thisTicket.status = ticket['columns']['status']['name']
+	thisTicket.open_date = ticket['columns']['startdate']
+	try:
+	    thisTicket.assigned_to = ticket['columns']['assigned']['name']
+	except:
+	    thisTicket.assigned_to = 'Unassigned'
+	try:
+	    thisTicket.jira_issue = ticket['columns']['custeventsn_case_number']
+	except:
+            pass
+	thisTicket.save()
+	i += 1
+    return HttpResponse(m.tickets)
 
 
 def refreshJiraFromNs(request):
@@ -409,7 +402,7 @@ class RequestNStoJIRA(object):
     def __init__(self):
         try:
             self.connectionOptions = {'server':'http://jira.motionsoft.com:8080'}
-            self.jira = JIRA(self.connectionOptions, basic_auth = ('mwillis', '8Richard&'))
+            self.jira = JIRA(self.connectionOptions, basic_auth = ('mwillis', '8richarD7'))
             self.issue = self.jira(object.jiraKey)
             self.issueStatus = self.issue.fields.status.raw['name']
             return issueStatus
