@@ -10,15 +10,11 @@ from jira.client import JIRA
 from app.views import jira_username, jira_password
 import sys
 
-
-
-
-
-
 class MasterJiraSyncFile:
     def __init__(self):
         self.errs = list()
 	self.errs1 = ''
+        #self.output = output
     def jCon(self):
         try:
             #initial instantion of book and page object
@@ -55,24 +51,23 @@ class MasterJiraSyncFile:
     def construct(self):
         try:
             #letters in a list for column organization
-            graphemes = 'A B C D E F G H I J K L M N O P Q R S T U V W Q X Y Z'
-            graphemes = graphemes.split()
+            graphemes = 'A B C D E F G H I J K L M N O P Q R S T U V W Q X Y Z'.split()
 
             #headers for the table to be used in construction iterator
-            headers = 'From Priority Key ReferredInMultipleNetsuiteTickets Enhancement Summary Status Resolution Updated Assignee Reporter FixVersion(s) Components Created Resolved Customer Sprint Netsuite#(fromjira) Case#(fromns) OpenedBy OpenDate NetsuiteStatus NetsuiteAssignee'
+            headers = 'From Priority Key ReferredInMultipleNetsuiteTickets Enhancement Summary Status Resolution Updated Assignee Reporter FixVersion(s) Components Created Resolved Customer Sprint Netsuite#(fromjira) Case#(fromns) OpenedBy OpenDate NetsuiteStatus NetsuiteAssignee'.split()
             #note: fixVersion, customfield_10082 return a list
             #note: sprint = customfield_10070, which returns a list of strings.
             #note: netsuite # = customfield_10080, returns a string (hopefully sep by commas)
             #these will be used in an iterator to run queries against jiraresults in exec()
-            seekers = 'fields.issuetype.name fields.priority.name key MULTNSTICS ENHANCEMENT fields.summary fields.status.name fields.resolution.name fields.updated fields.assignee.displayName fields.reporter.displayName fields.fixVersions fields.components fields.created fields.resolutiondate fields.customfield_10082 fields.customfield_10070 fields.customfield_10080 CASE OPENEDBY OPENDATE NSSTATUS NSASSIGNEE'
-            headers = headers.split()
-            seekers = seekers.split()
+            seekers = 'fields.issuetype.name fields.priority.name key MULTNSTICS ENHANCEMENT fields.summary fields.status.name fields.resolution.name fields.updated fields.assignee.displayName fields.reporter.displayName fields.fixVersions fields.components fields.created fields.resolutiondate fields.customfield_10082 fields.customfield_10070 fields.customfield_10080 CASE OPENEDBY OPENDATE NSSTATUS NSASSIGNEE'.split()
 
             #begin document creation
 
             #format variables
             bold = self.book.add_format({'bold':True})
-            hyperlink = ''
+            hyperlink = 'http://jira.motionsoft.com:8080/browse/%s'
+            linkFormat = self.book.add_format({'font_color':'blue', 'underline':1})
+            tip = 'click to view jira ticket'
 
             #begin header construction
             i=0
@@ -123,9 +118,12 @@ class MasterJiraSyncFile:
                                         bit = bit[:bit.find(',')]
                                         dat += str(bit)
                                 except:
-                                    dat = 'error' 
+                                    dat = '' 
                                 data = dat
-                            self.page.write(targetCell, data)
+                            if seekers[c] == 'key':
+                                self.page.write(targetCell, hyperlink % data, linkFormat, data, tip)
+                            else:    
+                                self.page.write(targetCell, data)
                         except:
                             self.errs.append(sys.exc_info())
                         c += 1

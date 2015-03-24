@@ -22,7 +22,7 @@ $(document).ready(function() {
             $('#masterJiraSyncFile').click(function() {
                 $.get('/masterJiraSyncFile', function (data){
                     alert(data)
-                });
+                });   
             });
 			$('#getTicketsToday').click(function(){
 			    $.get('/getTicketsToday', function (data){

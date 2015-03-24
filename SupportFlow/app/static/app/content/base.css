@@ -12,6 +12,16 @@ table{
     margin-top : 10px
 }
 
+#widgetButtonDiv {
+    float: left;
+    margin-left : 20px;
+}
+
+#databaseButtons {
+    float : right;
+    margin-right : 20px;
+}
+
 a#login {
     float : right;
     margin-right : 5%;

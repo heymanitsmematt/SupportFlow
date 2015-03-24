@@ -3,7 +3,9 @@ import simplejson
 from api.NetsuiteUpdate import *
 from app.models import *
 from django.views.decorators.csrf import csrf_exempt
+from django.views.static import serve
 from django.http import HttpResponse
+from django.utils.encoding import smart_str
 import xlsxwriter
 import datetime
 from jira.client import JIRA
@@ -38,14 +40,20 @@ def getTicketsToday(request):
 #two functions for master reports needed to integrate the two systems
 def masterJiraSyncFile(request):
     try:
+       
+
         fl = MasterJiraSyncFile()
         fl.jCon()
         fl.flatten()
-        fl.construct()
-        dout = 'file generated, go tell Matthew to move it for you!'
+        output = fl.construct().seek(0)
+
+        dout = HttpResponse(output.read(), content_type='application/mnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        dout['Content-Disposition'] = 'attachment; filename=%s' % smart_str('/dbx/MasterJiraSyncFile.xlsx')
+        #dout['X-Sendfile'] = smart_str('/dbx/MasterJiraSyncFile')
+
     except:
-        dout = 'error generating the file, go tell Matthew'
-    return HttpResponse(dout)
+        dout = HttpResponse(sys.exc_info()[0])
+    return dout
 
 def masterNetsuiteSyncFile(request):
     pass

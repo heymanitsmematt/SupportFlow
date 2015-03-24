@@ -1,10 +1,22 @@
 {% extends "app/base.html" %}
 {% load render_table from django_tables2 %}
 {% block content %}
-<button  type="button" id='jira_widget_button' class='widget_button'>NS/JIRA View</button> <br /> <button type="button" id='active_widget_button' class='widget_button'>Active Tickets</button><br /><button type="button" id="tickets_today_widget_button" class="widget_button">Tickets With Time</button><br /><button type='button' id='getTicketsToday'>Refresh Database</button><button type="button" id="masterJiraSyncFile">Gen. Jira Sync File</button>
-<form action="/ticketTable/?sort=-id">
-<input type="submit" value="Go To Dynamic Ticket Table!">
-</form>
+<div id='widgetButtonDiv'>
+    <button  type="button" id='jira_widget_button' class='widget_button'>NS/JIRA View</button> 
+    <br /> 
+    <button type="button" id='active_widget_button' class='widget_button'>Active Tickets</button>
+    <br />
+    <button type="button" id="tickets_today_widget_button" class="widget_button">Tickets With Time</button>
+    <br />
+    <form action="/ticketTable/?sort=-id">
+        <input type="submit" value="Go To Dynamic Ticket Table!">
+    </form>
+</div>
+<div id='databaseButtons'>
+    <button type='button' id=getTicketsToday'>Refresh NS Database</button>
+    <br />
+    <button type='button' id="masterJiraSyncFile">Gen. Jira Sync File</button>
+</div>
 <div id='tracked_tickets'>
     <table id='tracked_ticket_table'>
 	<tr>
@@ -88,4 +100,5 @@
 <div>
 
 </div>
+
 {% endblock %}
