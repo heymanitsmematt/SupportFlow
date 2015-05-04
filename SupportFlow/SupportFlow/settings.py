@@ -204,7 +204,7 @@ LOGGING = {
     }
 }
 
-
+'''
 #thread for api.Troller, Netsuite Ticket collecting module
 import threading
 from api.Troller import EmailTroller
@@ -212,7 +212,7 @@ def troll():
     t=EmailTroller()
 thr = threading.Thread(target=troll)
 thr.start()
-
+'''
 
 
 
