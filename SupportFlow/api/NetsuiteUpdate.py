@@ -74,11 +74,14 @@ class MassNetsuiteGet:
 
         for ticket in self.tickets:
             try:
-                localJissue = JiraTicket.objects.get(ticket['columns']['custeventsn_case_number'])
+                localJissue = JiraTicket.objects.get(jira_issue = ticket['columns']['custeventsn_case_number'])
                 newJissue = False
             except:
-                localJissue = JiraTicket.objects.create(ticket['columns']['custeventsn_case_number'])
-                newJissue = True
+                try:
+                    localJissue = JiraTicket.objects.create(jira_issue = ticket['columns']['custeventsn_case_number'])
+                    newJissue = True
+                except:
+                    print ticket['id']
             try:
                 jiraIssue = self.jCon.issue(ticket['columns']['custeventsn_case_number'])
                 if localJissue.status != jiraIssue.fields.status.name or newJissue == True:
@@ -91,17 +94,19 @@ class MassNetsuiteGet:
                     elif self.debug == True:
                         updateReq = requests.post(self.updateURL, data=self.payload, cookies=self.cookies, headers=self.headers)
                     print ticket['columns']['casenumber']
+                    localJissue.status = ticket['columns']['custeventsn_case_number']
+                    localJissue.save()
                 else:
                     pass
             except:
                 err = sys.exc_info()
-                pdb.set_trace()
+                #pdb.set_trace()
                 self.errors.append(ticket)
                 
 
 
 
-
+'''
 updateRange = raw_input("Do you want to update all tickets or a specific client? enter 'all' or clinet (eg 'WOW') ")
 
 trackedUpdate = raw_input("Is this a tracked update? Y or N? ")
@@ -123,4 +128,4 @@ elif debug == 'F':
 
 #m = MassNetsuiteGet(updateRange, trackedUpdate, debug)
 
-
+'''
