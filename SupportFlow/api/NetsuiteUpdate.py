@@ -62,9 +62,10 @@ class MassNetsuiteGet:
 
     def updateTrackedStatus(self):
         '''
-            TO DO: Debug/Test this --> Save jira status to db if it exists or create it. if it does exist, check if the status is the same as last check. If so, pop that from list before sending back to update netsuite
+            TO DO: Add in ns fields for Priority, Fix Version, and Last Updated Date. Populate with JIRA info
         '''
         self.updateURL = 'https://rest.netsuite.com/app/site/hosting/restlet.nl?script=35&deploy=1'
+        updatedJissues = []
 
         if self.debug == True:
             self.headers.pop('Authorization')
@@ -84,18 +85,32 @@ class MassNetsuiteGet:
                     print ticket['id']
             try:
                 jiraIssue = self.jCon.issue(ticket['columns']['custeventsn_case_number'])
+                
+                fixVersions = ''
+                for version in jiraIssue.fields.fixVersions:
+                    fixVersions += version.name
+
+                #hackey fix to get around Jira Tickets tracked to multiple Jira Issues
+                if newJissue == False and localJissue in (updatedJissues):
+                    newJissue = True
+
+                #pdb.set_trace()
                 if localJissue.status != jiraIssue.fields.status.name or newJissue == True:
                     self.payload = {}
                     self.payload['id'] = ticket['id']
                     self.payload['jiraStatus'] = jiraIssue.fields.status.name
+                    self.payload['fixVersions'] = fixVersions
+                    self.payload['priority'] = jiraIssue.fields.priority.name
                     self.payload = simplejson.dumps(self.payload)
                     if self.debug == False:
+                        pass
                         updateReq = requests.post(self.updateURL, data=self.payload, headers=self.headers)
                     elif self.debug == True:
                         updateReq = requests.post(self.updateURL, data=self.payload, cookies=self.cookies, headers=self.headers)
                     print ticket['columns']['casenumber']
-                    localJissue.status = ticket['columns']['custeventsn_case_number']
+                    localJissue.status = jiraIssue.fields.status.name
                     localJissue.save()
+                    updatedJissues.append(localJissue)
                 else:
                     pass
             except:
@@ -106,26 +121,3 @@ class MassNetsuiteGet:
 
 
 
-'''
-updateRange = raw_input("Do you want to update all tickets or a specific client? enter 'all' or clinet (eg 'WOW') ")
-
-trackedUpdate = raw_input("Is this a tracked update? Y or N? ")
-if trackedUpdate not in ('Y', 'N'):  
-    while trackedUpdate not in ('Y','N'):
-        trackedUpdate = raw_input("Is this a tracked update? Y or N? ")
-elif trackedUpdate == 'Y':
-    trackedUpdate = True
-elif trackedUpdate == 'N':
-    trackedUpdate = False
-
-debug = raw_input("Are you debugging? Y or N ")
-if debug not in ('Y','N'):
-    debug = False
-elif debug == 'Y':
-    debug = True
-elif debug == 'F':
-    debug = False
-
-#m = MassNetsuiteGet(updateRange, trackedUpdate, debug)
-
-'''

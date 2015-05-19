@@ -25,7 +25,7 @@ from django_tables2_reports.views import ReportTableView
 
 PROJECT_ROOT = path.dirname(path.abspath(path.dirname(__file__)))
 jira_username = 'mwillis'
-jira_password = '8richarD7'
+jira_password = 'Richard*&'
 
 class TicketList(ReportTableView):
     model = Ticket
