@@ -2,9 +2,12 @@ import requests
 import simplejson
 from app.models import *
 from jira.client import JIRA
-from app.views import jira_username, jira_password
+#from api.views import jira_username, jira_password
 import pdb
 import sys
+
+jira_username = 'mwillis'
+jira_password = 'Richard*&'
 
 class MassNetsuiteGet:
     def __init__(self, updateRange, trackedUpdate=False, debug=False):

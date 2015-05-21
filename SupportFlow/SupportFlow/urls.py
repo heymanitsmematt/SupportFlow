@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from app import views
 from app.models import *
-from api.views import getTicketInfo, getTicketsToday, masterJiraSyncFile#, masterNetsuiteSyncFile
+from api.views import getTicketInfo, getTicketsToday, masterJiraSyncFile, syncNetsuiteJira
 
 
 admin.autodiscover()
@@ -23,6 +23,7 @@ urlpatterns = patterns('',
     url(r'^getTicketInfo/$', getTicketInfo, name='getTicketInfo'),
     url(r'^getTicketsToday/$', getTicketsToday, name='getTicketsToday'),
     url(r'^masterJiraSyncFile/$', masterJiraSyncFile),
+    url(r'^syncNetsuiteJira/$', syncNetsuiteJira),
     #url(r'^masterNetsuiteSyncFile/$', masterNetsuiteSyncFile)
     url(r'^admin/', include(admin.site.urls)),
     )

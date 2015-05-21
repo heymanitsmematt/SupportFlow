@@ -7,8 +7,11 @@ from django.http import HttpResponse
 import xlsxwriter
 import datetime
 from jira.client import JIRA
-from app.views import jira_username, jira_password
+#from api.views import jira_username, jira_password
 import sys
+
+jira_username = 'mwillis'
+jira_password = 'Richard*&'
 
 class MasterJiraSyncFile:
     def __init__(self):

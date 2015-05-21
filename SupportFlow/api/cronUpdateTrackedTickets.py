@@ -1,8 +1,4 @@
 from api.NetsuiteUpdate import MassNetsuiteGet
+import requests
 
-m = MassNetsuiteGet('all', True)
-m.post()
-m.save()
-m.updateTrackedStatus()
-
-
+r = requests.get('10.89.30.244/syncNetsuiteJira')

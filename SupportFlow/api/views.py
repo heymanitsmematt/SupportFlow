@@ -9,9 +9,14 @@ from django.utils.encoding import smart_str
 import xlsxwriter
 import datetime
 from jira.client import JIRA
-from app.views import jira_username, jira_password
+#from app.views import jira_username, jira_password
 import sys
 from api.jiraxl import MasterJiraSyncFile
+import pdb
+from api.NetsuiteUpdate import MassNetsuiteGet
+
+jira_username = 'mwillis'
+jira_password = 'Richard*&'
 
 def getTicketsToday(request):
     m = MassNetsuiteGet('all') 
@@ -90,4 +95,18 @@ def getTicketInfo(request):
 	    except:
 		print line
     return HttpResponse(dataOut)
+
+
+def syncNetsuiteJira(request):
+    try:
+        m = MassNetsuiteGet('all', True)
+        m.post()
+        m.updateTrackedStatus()
+        m.save()
+        response = success
+    except:
+        response = sys.exc_info()
+        pdb.set_trace()
+
+    return HttpResponse(response)
 
