@@ -10,9 +10,10 @@ jira_username = 'mwillis'
 jira_password = 'Richard*&'
 
 class MassNetsuiteGet:
-    def __init__(self, updateRange, trackedUpdate=False, debug=False):
+    def __init__(self, updateRange, trackedUpdate=False, fixUpdate=False, debug=False):
         '''
-	updateRange will be either 'all' or a list of (startdate, title, customer) tuples
+	updateRange will be either 'all' or a list of (startdate, title, customer) tuples *note ns limits search to 1000
+        fixUpdate will only search netsuite for those tickets with the Jira Status populated in Netsuite but no fix version etc.
         dubug will allow the user to set a cookie provided by netsuite in the console
         '''
         self.debug = debug
@@ -30,6 +31,8 @@ class MassNetsuiteGet:
             self.url = 'https://rest.netsuite.com/app/site/hosting/restlet.nl?script=32&deploy=1'
         elif trackedUpdate == True:
             self.url = 'https://rest.netsuite.com/app/site/hosting/restlet.nl?script=35&deploy=1'
+            if fixUpdate == True:
+                self.url = 'https://rest.netsuite.com/app/site/hosting/restlet.nl?script=36&deploy=1'
         joptions = {'server':'http://jira.motionsoft.com:8080'}
         self.jCon = JIRA(joptions, basic_auth=(jira_username, jira_password))
 
@@ -63,10 +66,11 @@ class MassNetsuiteGet:
             except KeyError: pass
             thisTicket.save()
 
-    def updateTrackedStatus(self):
+    def updateTrackedStatus(self, fix=False):
         '''
             TO DO: Add in ns fields for Priority, Fix Version, and Last Updated Date. Populate with JIRA info
         '''
+
         self.updateURL = 'https://rest.netsuite.com/app/site/hosting/restlet.nl?script=35&deploy=1'
         updatedJissues = []
 
@@ -89,21 +93,19 @@ class MassNetsuiteGet:
             try:
                 jiraIssue = self.jCon.issue(ticket['columns']['custeventsn_case_number'])
                 
-                fixVersions = ''
-                for version in jiraIssue.fields.fixVersions:
-                    fixVersions += version.name
-
                 #hackey fix to get around Jira Tickets tracked to multiple Jira Issues
                 if newJissue == False and localJissue in (updatedJissues):
                     newJissue = True
 
-                #pdb.set_trace()
                 if localJissue.status != jiraIssue.fields.status.name or newJissue == True:
                     self.payload = {}
                     self.payload['id'] = ticket['id']
                     self.payload['jiraStatus'] = jiraIssue.fields.status.name
-                    self.payload['fixVersions'] = fixVersions
+                    self.payload['fixVersions'] = ', '.join([f.name for f in jiraIssues.fields.fixVersions])
                     self.payload['priority'] = jiraIssue.fields.priority.name
+                    #components can be a list, flatten that to a string
+                    self.payload['components'] = ', '.join([c.name for c in jiraIssue.fields.components])
+
                     self.payload = simplejson.dumps(self.payload)
                     if self.debug == False:
                         pass
@@ -121,6 +123,6 @@ class MassNetsuiteGet:
                 #pdb.set_trace()
                 self.errors.append(ticket)
                 
-
+        del updatedJissues[:]
 
 
